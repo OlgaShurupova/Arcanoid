@@ -1,0 +1,25 @@
+﻿<Window x:Class="Arcanoid.PlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Arcanoid"
+        mc:Ignorable="d"
+        Title="PlayWindow" Height="500" Width="700" WindowStartupLocation="CenterScreen" >
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- Блок игрового поля -->
+        <Canvas x:Name="PlayField" KeyDown="KeyDownHandler" SizeChanged="WindowChangeHandler"/>
+
+        <!-- Блок управления игровым процессом и вывода информации об игроке-->
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Content="Старт" Click="StartClic"/>
+            <Button Content="Пауза" Click="PauseClick"/>
+            <TextBlock Text="Очки:"/>
+            <TextBlock Text="{Binding Score}"/>
+        </StackPanel>
+    </Grid>
+</Window>

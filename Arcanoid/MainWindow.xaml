@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Arcanoid"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="300" Width="300" WindowStartupLocation="CenterScreen">
+    <UniformGrid Rows="2">
+        <Button Content="Старт"
+                Click="StartClick"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+        <Button Content="Настройки" 
+                Click="SettingsClick"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
+    </UniformGrid>
 </Window>
