@@ -34,9 +34,9 @@
                     var block = blocksArray[i, j];             
                     if (block!= null && CheckRect(ball, block))
                         if (HandleCollision(ball, block))
-                        {
-                            ball.DirectionY *= -1;
+                        {                            
                             ball.SpeedY += 0.1;
+                            ball.DirectionY *= -1;
                             platform.Speed += 0.1;
                             player.Score += 100;
                             blocksArray[i, j] = null;
