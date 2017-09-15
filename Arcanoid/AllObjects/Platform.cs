@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Arcanoid
 {
@@ -26,14 +18,6 @@ namespace Arcanoid
         #region Методы
 
         /// <summary>
-        /// Отрисовка платформы
-        /// </summary>
-        public override void Draw()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Перемещение платформы
         /// </summary>
         /// <param name="x"></param>
@@ -44,8 +28,7 @@ namespace Arcanoid
             position.Y = Position.Y;
             Position = position;
         }
-
-       
+              
 
         #endregion
     }

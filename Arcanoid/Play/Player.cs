@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Arcanoid
 {
-  public   class Player: INotifyPropertyChanged
+    public   class Player: INotifyPropertyChanged
     {
         private int _score;
         private int _lifeCount;

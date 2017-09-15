@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="300" WindowStartupLocation="CenterScreen">
     <UniformGrid Rows="2">
-        <Button Content="Старт"
+        <Button Content="Новая игра"
                 Click="StartClick"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>

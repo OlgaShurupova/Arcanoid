@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 
 namespace Arcanoid
@@ -26,13 +21,6 @@ namespace Arcanoid
         /// </summary>
         public Color Color { get; set; }     
         
-        #endregion
-
-        #region Методы
-        /// <summary>
-        /// Рисование объекта
-        /// </summary>
-        public abstract void Draw();
-        #endregion
+        #endregion      
     }
 }

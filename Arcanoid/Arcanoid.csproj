@@ -80,10 +80,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AllObjects\AbstractRectangle.cs" />
-    <Compile Include="Collision.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="PlayHelper.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Play\Collision.cs" />
+    <Compile Include="Play\Player.cs" />
+    <Compile Include="Play\PlayHelper.cs" />
+    <Compile Include="Settings\Settings.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>

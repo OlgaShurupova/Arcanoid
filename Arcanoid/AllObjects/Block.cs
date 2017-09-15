@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Arcanoid
 {
@@ -14,11 +9,6 @@ namespace Arcanoid
         /// при условии полностью заполненного массива
         /// </summary>
         public Point Indent { get; set; }
-              
+    }             
 
-        public override void Draw()
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

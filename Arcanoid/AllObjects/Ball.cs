@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -31,15 +26,11 @@ namespace Arcanoid
         /// Направление изменения координат по y
         /// </summary>
         public int DirectionY { get; set; } = -1;
-
+     
         /// <summary>
-        /// Сдвиг объекта
+        /// Установка свойств мяча как объекта на холсте 
         /// </summary>
-       // public Point Shift { get; set; }
-        public override void Draw()
-        {
-            throw new NotImplementedException();
-        }
+        /// <returns></returns>
         public Ellipse GetBall()
         {
             var colorBrush = new SolidColorBrush(Color);
@@ -56,6 +47,9 @@ namespace Arcanoid
             return ball;
         }
 
+        /// <summary>
+        /// Передвижение мяча
+        /// </summary>
         public void Move()
         {
             var position = new Point();

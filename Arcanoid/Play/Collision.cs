@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Arcanoid
+﻿namespace Arcanoid
 {
     public class Collision
     {
@@ -25,8 +19,8 @@ namespace Arcanoid
         /// </summary>
         public void CheckPlatform(Ball ball, Platform platform)
         {
-            if (ball.Position.Y + ball.Size.Height >= platform.Position.Y)
-                CheckRect(ball, platform);
+            if (CheckRect(ball, platform))
+                HandleCollision(ball, platform);
         }
 
         /// <summary>
@@ -38,8 +32,8 @@ namespace Arcanoid
                 for (var j = 0; j < settings.ColumnsCount; j++)
                 {
                     var block = blocksArray[i, j];             
-                    if (block!= null && ball.Position.Y <= block.Position.Y + block.Size.Height)
-                        if (CheckRect(ball, block))
+                    if (block!= null && CheckRect(ball, block))
+                        if (HandleCollision(ball, block))
                         {
                             ball.DirectionY *= -1;
                             ball.SpeedY += 0.1;
@@ -51,12 +45,26 @@ namespace Arcanoid
         }
 
         /// <summary>
-        /// Проверка на столкновение мяча с прямоугольным объектом
+        /// Проверка на столкновение мяча  с прямоугольным объектом
         /// </summary>
         /// <param name="ball"></param>
         /// <param name="rect"></param>
         /// <returns></returns>
-        public bool CheckRect(Ball ball, AbstractRectangle rect)
+        private bool CheckRect(Ball ball, AbstractRectangle rect)
+        {
+            return (ball.Position.X < rect.Position.X + rect.Size.Width &&
+                    ball.Position.X + ball.Size.Width > rect.Position.X &&
+                    ball.Position.Y < rect.Position.Y + rect.Size.Height &&
+                    ball.Size.Height + ball.Position.Y > rect.Position.Y);
+        }
+
+        /// <summary>
+        /// Проверка характера столкновения мяча с прямоугольным объектом
+        /// </summary>
+        /// <param name="ball"></param>
+        /// <param name="rect"></param>
+        /// <returns></returns>
+        private bool HandleCollision(Ball ball, AbstractRectangle rect)
         {
             var ballX1 = ball.Position.X;
             var ballX2 = ball.Position.X + ball.Size.Width;
@@ -70,7 +78,7 @@ namespace Arcanoid
             }
             else
             //Мяч ударился о левый угол о____
-            if (ballX2 >= rect.Position.X + ball.Size.Width && ballX2 <= rect.Position.X + rect.Size.Width)
+            if (ballX2 >= rect.Position.X && ballX2 <= rect.Position.X + rect.Size.Width)
             {
                 ball.DirectionY = -1;
                 ball.DirectionX = -ball.DirectionX;
@@ -79,7 +87,7 @@ namespace Arcanoid
             }
             else
             //Мяч ударился о правый угол ____о
-            if (ballX1 <= rect.Position.X && ballX1 - ball.Size.Width <= rect.Position.X + rect.Size.Width)
+            if (ballX1 >= rect.Position.X && ballX1 >= rect.Position.X + rect.Size.Width)
             {
                 ball.DirectionY = -1;
                 ball.DirectionX = -ball.DirectionX;

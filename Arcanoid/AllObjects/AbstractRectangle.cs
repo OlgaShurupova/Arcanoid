@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Arcanoid
-{
+{   
     public abstract class AbstractRectangle:PlayObject
     {
+        /// <summary>
+        /// Отрисовка прямоугольного объекта
+        /// </summary>
+        /// <returns></returns>
         public Rectangle GetRect()
         {
             var colorBrush = new SolidColorBrush(Color);
