@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace Arcanoid
 {
-    public abstract class PlayObject
+    public abstract class GameObject
     {
         #region Свойства
         /// <summary>

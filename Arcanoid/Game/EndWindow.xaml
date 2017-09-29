@@ -1,0 +1,22 @@
+﻿<Window x:Class="Arcanoid.EndWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Arcanoid"
+        mc:Ignorable="d"
+        Title="EndWindow" Height="160" Width="330" WindowStartupLocation="CenterScreen">
+    <Grid Background="{StaticResource FirstBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="LossText" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" x:Name="StackOfButtons">
+            <Button Content="Сыграть ещё" Click="NewGameClick"/>
+            <Button Content="Уйти в закат" Click="CloseClick" />
+        </StackPanel>
+
+    </Grid>
+</Window>

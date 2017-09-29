@@ -5,27 +5,14 @@ using System.Windows.Shapes;
 
 namespace Arcanoid
 {
-    public class Ball : PlayObject
+    public class Ball : GameObject
     {
         /// <summary>
         /// Скорость мяча по х
         /// </summary>
-        public double SpeedX { get; set; }
+        public Point Speed { get; set; }
 
-        /// <summary>
-        /// Скорость мяча по y
-        /// </summary>
-        public double SpeedY { get; set; }
-
-        /// <summary>
-        /// Направление изменения координат по х
-        /// </summary>
-        public int DirectionX { get; set; } = 1;
-
-        /// <summary>
-        /// Направление изменения координат по y
-        /// </summary>
-        public int DirectionY { get; set; } = -1;
+        public double Acceleration { get; set; } = 1;      
      
         /// <summary>
         /// Установка свойств мяча как объекта на холсте 
@@ -53,8 +40,8 @@ namespace Arcanoid
         public void Move()
         {
             var position = new Point();
-            position.X = Position.X + SpeedX * DirectionX;
-            position.Y = Position.Y + SpeedY * DirectionY;
+            position.X = Position.X + Speed.X;
+            position.Y = Position.Y + Speed.Y;
             Position = position;
         }
     }

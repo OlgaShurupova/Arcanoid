@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Arcanoid
 {
-    public   class Player: INotifyPropertyChanged
+    public   class Gamer: INotifyPropertyChanged
     {
         private int _score;
         private int _lifeCount;
@@ -22,7 +22,7 @@ namespace Arcanoid
         /// </summary>
         public int LifeCount
         {
-            get { return _score; }
+            get { return _lifeCount; }
             set { if (_lifeCount != value) { _lifeCount = value; NotifyPropertyChanged(); } }
         } 
 

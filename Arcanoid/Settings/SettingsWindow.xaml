@@ -1,0 +1,63 @@
+﻿<Window x:Class="Arcanoid.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Arcanoid"
+        mc:Ignorable="d"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"        
+        Title="SettingsWindow" Height="450" Width="435" WindowStartupLocation="CenterScreen" Background="{StaticResource FirstBackgroundBrush}">
+    <StackPanel Margin="5">
+        <!-- Задание цветов -->
+        <TextBlock Text="Цвет" FontWeight="Bold" Foreground="{StaticResource BoldFontBrush}"/>
+        <UniformGrid Rows="2" Columns="4">
+
+            <TextBlock Text="мяча:"/>
+            <xctk:ColorPicker SelectedColor="{Binding Path=Ball.Color, Mode=TwoWay}" />
+
+            <TextBlock Text="поля:"/>
+            <xctk:ColorPicker SelectedColor="{Binding Path=Field.Color, Mode=TwoWay}" />
+
+            <TextBlock Text="блоков:"/>
+            <xctk:ColorPicker SelectedColor="{Binding Path=Block.Color, Mode=TwoWay}" />
+
+            <TextBlock Text="платформы:"/>
+            <xctk:ColorPicker SelectedColor="{Binding Path=Platform.Color, Mode=TwoWay}" />
+
+        </UniformGrid>
+        
+        <!-- Задание скоростей -->
+        <TextBlock Text="Скорость" FontWeight="Bold" Foreground="{StaticResource BoldFontBrush}"/>
+        <UniformGrid Rows="1" Columns="4">
+            
+            <TextBlock Text="мяча:"/>
+            <TextBox Text="{Binding Path=Ball.Speed}"/>
+
+            <TextBlock Text="платформы:"/>
+            <TextBox Text="{Binding Path=Platform.Speed, Mode=TwoWay}"/>
+            
+        </UniformGrid>
+      
+        <!-- Число и расположение блоков -->
+        <UniformGrid Columns="2">
+            <TextBlock Text="Количество блоков:" FontWeight="Bold" Foreground="{StaticResource BoldFontBrush}"/>
+            <TextBox Text="{Binding Path=BlocksCount, Mode=TwoWay}"/>
+        </UniformGrid>
+        <TextBlock Text="Максимальное количество блоков " FontWeight="Bold" Foreground="{StaticResource BoldFontBrush}"/>
+        <UniformGrid Columns="4">            
+            <TextBlock Text="в строке:"/>
+            <TextBox Text="{Binding  Path=ColumnsCount, Mode=TwoWay}"/>
+            <TextBlock Text=" в столбце:"/>
+            <TextBox Text="{Binding  Path=RowsCount, Mode=TwoWay}"/>
+        </UniformGrid>
+        
+        <!-- Сохранение изменений настроек или их отмена -->
+        <UniformGrid Columns="2">
+            <Button Content="Отменить" Click="CancelClick" HorizontalAlignment="Center"/>
+            <Button Content="Сохранить" Click="SaveClick" HorizontalAlignment="Center"/>
+        </UniformGrid>           
+        
+    </StackPanel>
+    
+    
+</Window>

@@ -9,9 +9,11 @@
         /// <param name="playFieldWidth"></param>
         public void CheckBoder(Ball ball, double playFieldWidth)
         {
-            if (ball.Position.X + ball.Size.Width >= playFieldWidth) ball.DirectionX = -1;
-            if (ball.Position.X - ball.Size.Width <= 0) ball.DirectionX = 1;
-            if (ball.Position.Y <= 0) ball.DirectionY = 1;
+            var speed = ball.Speed;           
+            if (ball.Position.X + ball.Size.Width >= playFieldWidth) speed.X *= -1;
+            if (ball.Position.X - ball.Size.Width <= 0) speed.X *= -1;
+            if (ball.Position.Y <= 0) speed.Y *= -1;
+            ball.Speed = speed;
         }
 
         /// <summary>
@@ -26,21 +28,18 @@
         /// <summary>
         /// Проверка столкновения мяча с блоком
         /// </summary>
-        public void CheckBlocks(Ball ball, Block [,] blocksArray, Settings settings, Player player, Platform platform)
+        public void CheckBlocks(Ball ball, Block[,] blocksArray, Settings settings, Gamer player, Platform platform)
         {
             for (var i = 0; i < settings.RowsCount; i++)
                 for (var j = 0; j < settings.ColumnsCount; j++)
                 {
-                    var block = blocksArray[i, j];             
-                    if (block!= null && CheckRect(ball, block))
-                        if (HandleCollision(ball, block))
-                        {                            
-                            ball.SpeedY += 0.1;
-                            ball.DirectionY *= -1;
-                            platform.Speed += 0.1;
-                            player.Score += 100;
-                            blocksArray[i, j] = null;
-                        }
+                    var block = blocksArray[i, j];
+                    if (block != null && CheckRect(ball, block))
+                    {
+                        HandleCollision(ball, block);                                       
+                        player.Score += 100;
+                        blocksArray[i, j] = null;
+                    }
                 }
         }
 
@@ -64,37 +63,41 @@
         /// <param name="ball"></param>
         /// <param name="rect"></param>
         /// <returns></returns>
-        private bool HandleCollision(Ball ball, AbstractRectangle rect)
+        private void HandleCollision(Ball ball, AbstractRectangle rect)
         {
             var ballX1 = ball.Position.X;
             var ballX2 = ball.Position.X + ball.Size.Width;
             var ballX0 = (ballX1 + ballX2) / 2;
-
-            //Мяч ударился о платформу __о___
-            if (ballX0 >= rect.Position.X && ballX0 <= rect.Position.X + rect.Size.Width)
-            {
-                ball.DirectionY = -1;                
-                return true;
-            }
-            else
-            //Мяч ударился о левый угол о____
-            if (ballX2 >= rect.Position.X && ballX2 <= rect.Position.X + rect.Size.Width)
-            {
-                ball.DirectionY = -1;
-                ball.DirectionX = -ball.DirectionX;
-                ball.SpeedX+= 0.1;
-                return true;
-            }
-            else
-            //Мяч ударился о правый угол ____о
-            if (ballX1 >= rect.Position.X && ballX1 >= rect.Position.X + rect.Size.Width)
-            {
-                ball.DirectionY = -1;
-                ball.DirectionX = -ball.DirectionX;
-                ball.SpeedX +=0.1;
-                return true;
-            }
-            return false;
+            var speed = ball.Speed;
+            //Мяч ударился об угол о______ || _______о
+            if (! (ballX0 >= rect.Position.X && ballX0 <= rect.Position.X + rect.Size.Width)) speed.X *= -1;            
+            speed.Y *= -1;        
+            ball.Speed = speed;
+            if (rect is Platform) ChangeSpeed(ball, rect as Platform);
         }
+
+        /// <summary>
+        /// Изменение скорости мяча и платформы
+        /// </summary>
+        /// <param name="ball"></param>
+        /// <param name="platform"></param>
+        private void ChangeSpeed(Ball ball, Platform platform)
+        {
+            var speed = ball.Speed;           
+            if (speed.X * platform.Speed > 0)
+            {
+                speed.X *= ball.Acceleration;
+                speed.Y *= ball.Acceleration;
+                platform.Speed *= 1.1;
+            }
+            else
+            {
+                speed.X /= ball.Acceleration;
+                speed.Y /= ball.Acceleration;
+                platform.Speed /= 1.1;
+            }
+            ball.Speed = speed;           
+        }
+
     }
 }

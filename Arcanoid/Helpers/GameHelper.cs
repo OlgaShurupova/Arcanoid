@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace Arcanoid
 {
-    public class PlayHelper
+    public class GameHelper
     {
         /// <summary>
         /// Массив блоков
@@ -19,8 +19,8 @@ namespace Arcanoid
         public void InitializeBlocksArray(Block block, Settings settings)
         {
             var currentBlockNumber = 0;
-            var positionsArray = GeneratePositionsArray(settings);
-
+            //var positionsArray = GeneratePositionsArray(settings);
+            
             BlocksArray = new Block[settings.RowsCount, settings.ColumnsCount];
 
             for (var i = 0; i < settings.RowsCount; i++)
@@ -32,7 +32,7 @@ namespace Arcanoid
                 {
                     block.Position = ChangeBlockPosition(block, true, j);
                     //Если номер текущего блока содержится в массиве номеров блоков на заполнение, создание новго блока 
-                    if (positionsArray.Any(x => x == currentBlockNumber)) BlocksArray[i, j] = GetBlock(block);
+                    if (settings.PositionsArray.Any(x => x == currentBlockNumber)) BlocksArray[i, j] = GetBlock(block);
                     currentBlockNumber++;
                 }
             }
@@ -43,20 +43,19 @@ namespace Arcanoid
         /// </summary>
         /// <param name="settings"></param>
         /// <returns></returns>
-        private int[] GeneratePositionsArray(Settings settings)
+        public void GeneratePositionsArray(Settings settings)
         {
             var random = new Random();
-            var positionsArray = new int[settings.BlocksCount];
+            settings.PositionsArray = new int[settings.BlocksCount];
             for (var i = 0; i < settings.BlocksCount; i++)
             {
                 int item;
                 do
                 {
                     item = random.Next(0, settings.ColumnsCount * settings.RowsCount);
-                } while (positionsArray.Any(x => x == item));
-                positionsArray[i] = item;
-            }
-            return positionsArray;
+                } while (settings.PositionsArray.Any(x => x == item));
+                settings.PositionsArray[i] = item;
+            }        
         }
 
         /// <summary>
@@ -114,14 +113,13 @@ namespace Arcanoid
             return newPosition;
         }
 
-
         /// <summary>
         /// Передвижение платформы
         /// </summary>
         /// <param name="x"></param>
         public void MovePlatform( Platform platform, Size fieldSize)
         {
-            var x = platform.Speed * platform.Direction;
+            var x = platform.Speed;
             if (platform.Position.X + x >= 0 && platform.Position.X + x + platform.Size.Width <= fieldSize.Width)
                 platform.Move(x);
         }

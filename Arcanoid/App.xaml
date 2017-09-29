@@ -4,10 +4,11 @@
              xmlns:local="clr-namespace:Arcanoid"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
-        <SolidColorBrush Color="#F0EDFD" x:Key="FirstBackgroundBrush" />
-        <SolidColorBrush Color="#F0EDFD" x:Key="SecondBackgroundBrush" />
+
+        <SolidColorBrush Color="#D9DFE3" x:Key="FirstBackgroundBrush" />
+        <SolidColorBrush Color="#F0F2F4" x:Key="SecondBackgroundBrush" />
         <SolidColorBrush Color="Black" x:Key="ForegraundBrush"/>
+        <SolidColorBrush Color="#272232" x:Key="BoldFontBrush"/>
 
         <Style TargetType="Button">
             <Setter Property="Margin" 
@@ -19,9 +20,9 @@
             <Setter Property="Foreground" 
                     Value="{StaticResource ForegraundBrush}"/>
             <Setter Property="Background" 
-                    Value="{StaticResource FirstBackgroundBrush}"/>
+                    Value="{StaticResource SecondBackgroundBrush}"/>
             <Setter Property="MaxHeight"
-                    Value="40"/>
+                    Value="40"/>  
         </Style>
 
         <Style TargetType="ComboBox">

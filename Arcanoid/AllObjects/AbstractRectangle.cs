@@ -4,7 +4,7 @@ using System.Windows.Shapes;
 
 namespace Arcanoid
 {   
-    public abstract class AbstractRectangle:PlayObject
+    public abstract class AbstractRectangle:GameObject
     {
         /// <summary>
         /// Отрисовка прямоугольного объекта

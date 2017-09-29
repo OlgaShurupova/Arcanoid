@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Arcanoid"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300" WindowStartupLocation="CenterScreen">
-    <UniformGrid Rows="2">
+        Title="MainWindow" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+    <UniformGrid Rows="2" Background="{StaticResource FirstBackgroundBrush}">
         <Button Content="Новая игра"
                 Click="StartClick"
                 HorizontalAlignment="Center"
