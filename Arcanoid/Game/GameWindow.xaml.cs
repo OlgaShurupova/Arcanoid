@@ -27,6 +27,7 @@ namespace Arcanoid
             DataContext = _gamer;
             Settings = settings;          
             InitializeGameObjects();
+            WindowChangeHandler(null, null);
             SetTimer();        
         }
 
@@ -63,12 +64,27 @@ namespace Arcanoid
         /// </summary>
         public void InitializeGameObjects()
         {
-            PlayField.Background = new SolidColorBrush(Settings.Field.Color);
+            PlayField.Background = new SolidColorBrush(Settings.Field.Color);           
             _field.Block = Settings.Block;
-            _field.Ball = Settings.Ball;       
-            _field.Platform = Settings.Platform;           
-            _field.Block.Indent = GetIndent(500, 600);
+            SetProperties();
+            _field.Block.Indent = GetIndent(500, 600);        
             _gameHelper.InitializeBlocksArray(_field.Block, Settings);           
+        }
+
+        private void SetProperties()
+        {
+            _field.Ball = new Ball()
+            {
+                Size = Settings.Ball.Size,
+                Color = Settings.Ball.Color,
+                Speed = Settings.Ball.Speed
+            };
+            _field.Platform = new Platform()
+            {
+                Size = Settings.Platform.Size,
+                Color = Settings.Platform.Color,
+                Speed = Settings.Platform.Speed
+            };
         }
 
         /// <summary>
@@ -237,10 +253,8 @@ namespace Arcanoid
                 _isGame = false;        
                 _gamer.LifeCount--;
                 _field.Ball.Move();
-                _field.Platform = Settings.Platform;
-                _field.Ball = Settings.Ball;
+                SetProperties();
                 WindowChangeHandler(null, null);
-
                 UpdateCanvas();
                 if (_gamer.LifeCount == 0)
                 {

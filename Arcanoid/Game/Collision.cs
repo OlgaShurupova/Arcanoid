@@ -1,4 +1,7 @@
-﻿namespace Arcanoid
+﻿using System;
+using System.Windows;
+
+namespace Arcanoid
 {
     public class Collision
     {
@@ -51,10 +54,11 @@
         /// <returns></returns>
         private bool CheckRect(Ball ball, AbstractRectangle rect)
         {
-            return (ball.Position.X < rect.Position.X + rect.Size.Width &&
-                    ball.Position.X + ball.Size.Width > rect.Position.X &&
-                    ball.Position.Y < rect.Position.Y + rect.Size.Height &&
-                    ball.Size.Height + ball.Position.Y > rect.Position.Y);
+            var position = new Point();
+            position.X = ball.Position.X + ball.Size.Width;
+            position.Y = ball.Position.Y + ball.Size.Height;
+            var rectangle = new Rect(rect.Position, rect.Size);
+            return rectangle.Contains(position);
         }
 
         /// <summary>
@@ -64,16 +68,33 @@
         /// <param name="rect"></param>
         /// <returns></returns>
         private void HandleCollision(Ball ball, AbstractRectangle rect)
+        {           
+            var speed = ball.Speed;     
+            speed.X = GetBallSpeedX(ball, rect);          
+            speed.Y *= -1;        
+            ball.Speed = speed;
+            if (rect is Platform) ChangeSpeed(ball, rect as Platform);
+        }
+
+        /// <summary>
+        /// Получение скорости мяча по Х
+        /// </summary>
+        /// <param name="ball"></param>
+        /// <param name="rect"></param>
+        /// <returns></returns>
+        private double GetBallSpeedX(Ball ball, AbstractRectangle rect)
         {
             var ballX1 = ball.Position.X;
             var ballX2 = ball.Position.X + ball.Size.Width;
             var ballX0 = (ballX1 + ballX2) / 2;
-            var speed = ball.Speed;
+
             //Мяч ударился об угол о______ || _______о
-            if (! (ballX0 >= rect.Position.X && ballX0 <= rect.Position.X + rect.Size.Width)) speed.X *= -1;            
-            speed.Y *= -1;        
-            ball.Speed = speed;
-            if (rect is Platform) ChangeSpeed(ball, rect as Platform);
+            if (!(ballX0 >= rect.Position.X && ballX0 <= rect.Position.X + rect.Size.Width)) return ball.Speed.X*(-1);
+            // __o____ || _______ 
+            if (ballX0 >= rect.Position.X && ballX0 <= rect.Position.X + rect.Size.Width / 3) return Math.Abs(ball.Speed.X)*(-1)-0.2;
+            // ______ || _____o__ 
+            if (ballX0>= rect.Position.X + rect.Size.Width / 3*2 && ballX0<=rect.Position.X+rect.Size.Width) return Math.Abs(ball.Speed.X) +0.2;
+            return ball.Speed.X;
         }
 
         /// <summary>

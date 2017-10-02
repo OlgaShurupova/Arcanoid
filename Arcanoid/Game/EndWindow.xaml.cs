@@ -33,10 +33,10 @@ namespace Arcanoid
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void NewGameClick(object sender, RoutedEventArgs e)
-        {
+        {                        
             var gameWindow = new GameWindow(_gameWindow.Settings);
-            gameWindow.Show();
             _gameWindow.Close();
+            gameWindow.Show();
             Close();
         }
 

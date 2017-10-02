@@ -32,7 +32,7 @@ namespace Arcanoid
         {
             Size = new Size(10, 10),
             Color = Color.FromRgb(20, 47, 54),
-            Speed = new Point(1, 1)
+            Speed = new Point(2, -2)
 
         };
 
